@@ -1,0 +1,110 @@
+
+## Projet d'algorithmique sur isomorphisme du graphe ##
+
+  Utiliser > make pour la compilation
+  Le fichier time_annotation.c contient les annotations du temps
+
+
+## Utilisation ##
+
+  > ./main [option] <inputs>
+
+  Si non option est spécifiée, le programme prend en entrée un fichier
+  contenant deux graphes et indique si ils sont isomorphes (avec le 
+  heuristique de Weisfeiler-Lehman). Pour les instances positives, on 
+  affiche aussi une correspondance possible entre les sommets.
+
+  Exemple:
+    > ./main tests/test-yes
+    > ./main tests/test-no
+
+  Les formats demandés des différents objets sont précisé en-dessous
+  
+  Attention! Si les formats ne sont pas respectés, le comportement du 
+  program est imprévisible.
+
+
+## Options ##
+
+  --naif
+      Utiliser l'algorithme backtracking naif (Q2)
+
+  --degree
+      Utiliser l'algorithme backtracking  avec partitionnement sur les 
+      degrés (Q3)
+
+  --partition
+      Trouver le partitionnement stable d'un graphe à partir d'un
+      partitionnement initial (Q4)
+      Le fichier en entrée doit contenir d'abort un graphe et puis un
+      partitionnement de ses sommets
+      
+      Exemple:
+        > ./main --partition tests/test-partition
+
+  --check
+      Tester si une bijection en entrée est un isomorphisme de 
+      deux graphes donnés (Q1)
+      Le fichier en entrée doit contenir d'abort les deux graphes puis
+      la bijection en quetion
+
+      Exemple:
+        > ./main --check tests/test-check-yes
+        > ./main --check testS/test-check-no
+
+  --transform
+      Donner l'image d'un graphe après une bijection spécifiée
+      Le fichier en entrée contient le graphe et la bijection
+      (la fonction graph_transform dans graph.c)
+
+      Exemple:
+        > ./main --transform tests/test-transform
+
+  --permu
+      Les entrées sont uniquement des entiers, pour chaque entier n donné
+      on affiche une permutation aléatoire de {0,1,...,n-1}
+      (la fonction random_permutation dans array.c)
+
+      Exemple:
+        > ./main --permu 5 25 10 14
+
+  --graph
+      L'entrée est constituée d'un entier n et un floattant p entre 0 et 1, 
+      on affiche un graphe aléatoire de n sommets, chaque paire de sommets
+      est liée avec probabilité p
+      (la fonction random_graph de graph.c)
+
+      Exemple:
+        > ./main --graph 10 0.5
+
+  --rgraph
+      Deux entiers n et k en entrée, et on affiche un graphe régulier
+      de n sommets, chaque sommet de degré k, le graphe engendré est
+      plus au moins aléatoire
+      Attention il faut k < n et que n*k soit pair
+      (la fonction generate_regular_graph de graph.c avec times = 500)
+
+      Exemple:
+        > ./main --rgraph 15 6
+
+  --help
+      Afficher la liste des options
+
+
+## Formats des différents objets ##
+
+  Graphe:
+    <#sommets> <#arêtes>
+    <#voisins du sommet 0> <voisins du sommet 0 séparé par espaces>
+    <#voisins du sommet 1> <voisins du sommet 1 séparé par espaces>
+    ...
+
+  Partition:
+    <#éléments> <#parties>
+    <#éléments de la partie 0> <éléments de la partie 0 séparé par espaces>
+    <#éléments de la partie 1> <éléments de la partie 1 séparé par espaces>
+    ...
+
+  Permutation:
+    <#éléments> <l'image de 0> ... <l'image du dernier élément>
+
