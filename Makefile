@@ -1,8 +1,16 @@
+OBJS= list.o array.o graph.o graph.o partition.o weisfeiler-lehman.o main.o
+CC= gcc
+CCFLAGS= -std=c99 -O2
+BIN= main
 
-main: main.c list.c array.c graph.c partition.c weisfeiler-lehman.c
-	gcc -std=c99 -o main main.c list.c array.c graph.c partition.c \
-	weisfeiler-lehman.c
+all: $(OBJS)
+	$(CC) $(CCFLAGS) -o $(BIN) $^
 
-test: test.c list.c array.c graph.c partition.c weisfeiler-lehman.c
-	gcc -std=c99 -o test test.c list.c array.c graph.c partition.c \
-	weisfeiler-lehman.c
+%.o: %.c
+	$(CC) -c $(CCFLAGS) -o $@ $<
+
+.PHONY: clean
+
+clean:
+	rm -f *.o $(BIN)
+
